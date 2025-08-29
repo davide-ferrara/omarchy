@@ -7,6 +7,8 @@
   "modules-left": ["custom/omarchy", "hyprland/workspaces"],
   "modules-center": ["clock", "custom/update"],
   "modules-right": [
+    "custom/weather",
+    "custom/space",
     "group/tray-expander",
     "bluetooth",
     "network",
@@ -51,6 +53,17 @@
     "interval": 3600
   },
 
+  "custom/space": {
+    "format": "  "
+  },
+  "custom/weather": {
+    "format": "{}",
+    "exec": "omarchy-weather",
+    "return-type": "json",
+    "tooltip": true,
+    "tooltip-format": "{}",
+    "interval": 3600
+  },
   "cpu": {
     "interval": 5,
     "format": "󰍛",

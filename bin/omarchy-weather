@@ -1,0 +1,70 @@
+#!/bin/bash
+
+source "$OMARCHY_PATH/config/omarchy-weather.conf"
+
+weather_data=$(curl -s "https://api.open-meteo.com/v1/forecast?latitude=$LAT&longitude=$LONG&current=weather_code,temperature_2m")
+
+weather_code=$(echo "$weather_data" | jq '.current.weather_code')
+temperature_2m=$(echo "$weather_data" | jq '.current.temperature_2m')
+
+# Check for a bad response from curl
+if [[ -z "$weather_data" ]]; then
+    echo "{\"text\":\"🚫\", \"tooltip\":\"Connection Error\"}"
+    exit 1
+fi
+
+# Check for jq parsing errors
+if [[ -z "$weather_code" || -z "$temperature_2m" ]]; then
+    echo "{\"text\":\"🚫\", \"tooltip\":\"Data Parsing Error\"}"
+    exit 1
+fi
+
+case "$weather_code" in
+    0)
+        icon="☀️"
+        condition="Clear sky"
+        ;;
+    1 | 2 | 3)
+        icon="🌤️"
+        condition="Partly cloudy"
+        ;;
+    45 | 48)
+        icon="🌫️"
+        condition="Foggy"
+        ;;
+    51 | 53 | 55)
+        icon="🌧️"
+        condition="Drizzle"
+        ;;
+    61 | 63 | 65)
+        icon="🌧️"
+        condition="Rain"
+        ;;
+    66 | 67)
+        icon="🧊"
+        condition="Freezing Rain"
+        ;;
+    71 | 73 | 75)
+        icon="🌨️"
+        condition="Snow"
+        ;;
+    80 | 81 | 82)
+        icon="🌦️"
+        condition="Rain Showers"
+        ;;
+    85 | 86)
+        icon="❄️"
+        condition="Snow Showers"
+        ;;
+    95 | 96 | 99)
+        icon="⛈️"
+        condition="Thunderstorm"
+        ;;
+    *)
+        icon="❓"
+        condition="Unknown"
+        ;;
+esac
+
+json_output="{\"text\":\"$icon $temperature_2m°C\", \"tooltip\":\"Condition: $condition\"}"
+echo "$json_output"
