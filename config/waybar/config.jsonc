@@ -112,7 +112,7 @@
     "format-disabled": "󰂲",
     "format-connected": "",
     "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "alacritty --class=Bluetui -e bluetui"
+    "on-click": "blueberry"
   },
   "pulseaudio": {
     "format": "{icon}",

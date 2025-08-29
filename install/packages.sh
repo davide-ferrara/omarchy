@@ -5,7 +5,7 @@ sudo pacman -S --noconfirm --needed \
   avahi \
   bash-completion \
   bat \
-  bluetui \
+  blueberry \
   brightnessctl \
   btop \
   cargo \
