@@ -1,0 +1,18 @@
+#!/bin/bash
+
+STATUS=$(ip link show home 2>/dev/null | grep -q "home" && echo "on" || echo "off")
+
+if [ "$1" = "--toggle" ]; then
+  if [ "$STATUS" = "on" ]; then
+    pkexec wg-quick down home
+  else
+    pkexec wg-quick up home
+  fi
+  exit 0
+fi
+
+if [ "$STATUS" = "on" ]; then
+  echo '{"text":" ", "class":"vpn-on"}'
+else
+  echo '{"text":" ", "class":""}'
+fi
