@@ -8,6 +8,7 @@
   "modules-center": ["clock", "custom/update", "custom/screenrecording-indicator"],
   "modules-right": [
     "group/tray-expander",
+    "custom/wol",
     "bluetooth",
     "custom/wireguard",
     "network",
@@ -59,6 +60,13 @@
     "tooltip": false,
     "interval": 10
   },
+  "custom/wol": {
+    "exec": "omarchy-wol -s",
+    "on-click": "omarchy-wol -w",
+    "return-type": "text",
+    "tooltip": false,
+    "interval": 5
+  },
 
   "cpu": {
     "interval": 5,
@@ -97,6 +105,11 @@
     "format-full": "󰂅",
     "tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
     "tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
+    "events": {
+      "on-discharging-warning": "notify-send -u normal 'Low Battery'",
+      "on-discharging-critical": "notify-send -u critical 'Very Low Battery'",
+      // "on-charging-100": "notify-send -u normal 'Battery Full!'"
+    },
     "interval": 5,
     "on-click": "omarchy-menu power",
     "states": {
@@ -105,9 +118,9 @@
     }
   },
   "bluetooth": {
-    "format": "",
-    "format-disabled": "󰂲",
-    "format-connected": "",
+    "format": " ",
+    "format-disabled": "󰂲 ",
+    "format-connected": " ",
     "tooltip-format": "Devices connected: {num_connections}",
     "on-click": "blueberry"
   },
