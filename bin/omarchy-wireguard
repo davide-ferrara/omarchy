@@ -12,7 +12,7 @@ if [ "$1" = "--toggle" ]; then
 fi
 
 if [ "$STATUS" = "on" ]; then
-  echo '{"text":" ", "class":"vpn-on"}'
+  echo '{"text":"", "class":"vpn-on"}'
 else
-  echo '{"text":" ", "class":""}'
+  echo '{"text":"", "class":""}'
 fi

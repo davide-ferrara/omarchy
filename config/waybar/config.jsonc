@@ -9,8 +9,8 @@
   "modules-right": [
     "group/tray-expander",
     "custom/wol",
-    "bluetooth",
     "custom/wireguard",
+    "bluetooth",
     "network",
     "pulseaudio",
     "cpu",
@@ -119,9 +119,9 @@
     }
   },
   "bluetooth": {
-    "format": " ",
-    "format-disabled": "󰂲 ",
-    "format-connected": " ",
+    "format": "",
+    "format-disabled": "󰂲",
+    "format-connected": "",
     "tooltip-format": "Devices connected: {num_connections}",
     "on-click": "blueberry"
   },
